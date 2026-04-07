@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: smart-event-api
+
+  datasource:
+    url: jdbc:postgresql://db.gmkgrizoaihogvytlzcd.supabase.co:5432/postgres
+    username: postgres
+    password: CoxC3fmQNfEclF30
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+server:
+  port: ${PORT:8080}
+  error:
+    include-message: always
+    include-binding-errors: always
+
+app:
+  supabase:
+    jwt-secret: ae32b11c-833c-4d9d-bcb0-bac1fc76b504
+    url: https://gmkgrizoaihogvytlzcd.supabase.co
+  cors:
+    allowed-origins: http://localhost:5173
+  admin:
+    emails: ayushkulal21@gmail.com
+  catering:
+    price-per-guest: 500
+
+logging:
+  level:
+    com.smartevent: INFO
+    org.springframework.web: WARN
