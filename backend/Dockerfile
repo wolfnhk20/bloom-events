@@ -1,17 +1,17 @@
-# Use Java 17 runtime
-FROM eclipse-temurin:17-jdk
+FROM maven:3.9.6-eclipse-temurin-17 AS builder
 
-# Set working directory
 WORKDIR /app
 
-# Copy all files
 COPY . .
 
-# Build the project
-RUN ./mvnw clean package -DskipTests || mvn clean package -DskipTests
+RUN mvn clean package -DskipTests
 
-# Expose port (Render will override with PORT env)
+FROM eclipse-temurin:17-jdk
+
+WORKDIR /app
+
+COPY --from=builder /app/target/*.jar app.jar
+
 EXPOSE 8080
 
-# Run the app
-CMD ["sh", "-c", "java -jar target/*.jar"]
+CMD ["sh", "-c", "java -jar app.jar"]
