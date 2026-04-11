@@ -37,14 +37,11 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                // Public endpoints
                 .requestMatchers(HttpMethod.GET, "/api/packages/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/services/**").permitAll()
                     .requestMatchers(HttpMethod.POST, "/api/events/**").permitAll()
                 .requestMatchers("/api/health").permitAll()
-                // Admin endpoints
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                // All other endpoints require authentication
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
