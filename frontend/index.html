@@ -13,5 +13,14 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <!-- Ragora Chat Widget -->
+    <script>
+      window.RAGORA_CONFIG = {
+        clientKey: import.meta.env.CLIENT_KEY,
+        apiUrl: 'https://ragora-backend-prod.onrender.com',
+        primaryColor: '#dc4878',
+      };
+    </script>
+    <script src="https://ragora-backend-prod.onrender.com/widget.js" async></script>
   </body>
 </html>
